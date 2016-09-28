@@ -8,3 +8,7 @@ is_e2e() {
 is_lint() {
   [[ "$MODE" = lint ]]
 }
+
+is_extract_metadata() {
+  [[ "$MODE" = extract_metadata ]]
+}

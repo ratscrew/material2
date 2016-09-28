@@ -1,47 +1,29 @@
 # Developer guide: getting your environment set up
 
-1. Make sure you have `node` installed with a version at _least_ 4.2.3.
-2. Run `npm install -g angular-cli` to install the Angular CLI.
+1. Make sure you have `node` installed with a version at _least_ 5.5.0.
+2. Run `npm install -g gulp` to install gulp.
 3. Fork the `angular/material2` repo. 
 4. Clone your fork. 
    Recommendation: name your git remotes `upstream` for `angular/material2`
    and `<your-username>` for your fork. Also see the [team git shortcuts](https://github.com/angular/material2/wiki/Team-git----bash-shortcuts).
-5. From the root of the project, run `npm install`, then run `npm run typings` to install typescript definitions.
+5. From the root of the project, run `npm install`.
 
 
-To build the project, run `ng build`. 
-To watch for changes and automatically rebuild, run `ng build --watch`
+To build the components in dev mode, run `gulp build:components`.
+To build the components in release mode, run `gulp build:release`
+ 
+To bring up a local server, run `gulp serve:devapp`. This will automatically watch for changes 
+and rebuild. The browser should refresh automatically when changes are made.
 
-To bring up a local server, run `ng serve`. This will automatically watch for changes and rebuild.
-After the changes rebuild, the browser currently needs to be manually refreshed.
+### Running tests
 
-To run unit tests, run `npm test`.
+To run unit tests, run `gulp test`.
+To run the e2e tests, run `gulp e2e`.
+To run lint, run `gulp lint`.
 
-###Running e2e tests:
 
-To prepare your environment, you'll need to install protractor and selenium.
+### Running benchmarks
+Not yet implemented.
 
-1. Globally install protractor:
-
-```
-npm install -g protractor
-```
-
-2.  Install the correct selenium version with webdriver-manager (this comes with protractor):
-
-```
-webdriver-manager update
-```
-
-When running the tests:
-
-1.  Spin up a local server with `ng-serve`. 
-
-2.  Run tests with:
-
-```
-protractor test/protractor.conf.js
-```
-
-Running benchmarks: not yet implemented
-Running screenshot diff tests: not yet implemented
+### Running screenshot diff tests.
+Not yet implemented.

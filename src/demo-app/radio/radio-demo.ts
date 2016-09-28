@@ -1,16 +1,15 @@
 import {Component} from '@angular/core';
-import {MdRadioButton, MdRadioGroup} from '../../components/radio/radio';
-import {MdRadioDispatcher} from '../../components/radio/radio_dispatcher';
+
 
 @Component({
+  moduleId: module.id,
   selector: 'radio-demo',
-  templateUrl: 'demo-app/radio/radio-demo.html',
-  styleUrls: ['demo-app/radio/radio-demo.css'],
-  providers: [MdRadioDispatcher],
-  directives: [MdRadioButton, MdRadioGroup]
+  templateUrl: 'radio-demo.html',
+  styleUrls: ['radio-demo.css'],
 })
 export class RadioDemo {
   isDisabled: boolean = false;
+  isAlignEnd: boolean = false;
   favoriteSeason: string = 'Autumn';
   seasonOptions = [
     'Winter',

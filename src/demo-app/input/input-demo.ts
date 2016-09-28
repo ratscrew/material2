@@ -1,19 +1,13 @@
 import {Component} from '@angular/core';
-import {MD_INPUT_DIRECTIVES} from '../../components/input/input';
-import {MdButton} from '../../components/button/button';
-import {MdCard} from '../../components/card/card';
-import {MdCheckbox} from '../../components/checkbox/checkbox';
-import {MdIcon} from '../../components/icon/icon';
-import {MdToolbar} from '../../components/toolbar/toolbar';
 
 
 let max = 5;
 
 @Component({
+  moduleId: module.id,
   selector: 'input-demo',
-  templateUrl: 'demo-app/input/input-demo.html',
-  styleUrls: ['demo-app/input/input-demo.css'],
-  directives: [MdCard, MdCheckbox, MdButton, MdIcon, MdToolbar, MD_INPUT_DIRECTIVES]
+  templateUrl: 'input-demo.html',
+  styleUrls: ['input-demo.css'],
 })
 export class InputDemo {
   dividerColor: boolean;

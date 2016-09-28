@@ -1,19 +1,14 @@
-var gulp = require('gulp');
-var inlineNg2Template = require('gulp-inline-ng2-template');
-
-
+'use strict';
 /**
- * DO NOT ADD EXTRA TASKS HERE.
- *
- * gulp is only used temporarily in order to perform HTML and CSS in-lining for publishing.
- * Eventually the CLI should support this.
- *
- * See https://github.com/angular/angular-cli/issues/296
- *
+ * Load the TypeScript compiler, then load the TypeScript gulpfile which simply loads all
+ * the tasks. The tasks are really inside tools/gulp/tasks.
  */
 
-gulp.task('inline-resources', function(){
-  gulp.src('./dist/components/**/*.js')
-      .pipe(inlineNg2Template({base: './dist', target: 'es5'}))
-      .pipe(gulp.dest('./dist/components'));
+const path = require('path');
+
+// Register TS compilation.
+require('ts-node').register({
+  project: path.join(__dirname, 'tools/gulp')
 });
+
+require('./tools/gulp/gulpfile');

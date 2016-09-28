@@ -1,13 +1,13 @@
 import {Component} from '@angular/core';
-import {MD_GRID_LIST_DIRECTIVES} from '../../components/grid-list/grid-list';
-import {MdButton} from '../../components/button/button';
-import {MD_CARD_DIRECTIVES} from '../../components/card/card';
+import {MdIconRegistry} from '@angular/material';
+
 
 @Component({
+  moduleId: module.id,
   selector: 'grid-list-demo',
-  templateUrl: 'demo-app/grid-list/grid-list-demo.html',
-  styleUrls: ['demo-app/grid-list/grid-list-demo.css'],
-  directives: [MD_GRID_LIST_DIRECTIVES, MdButton, MD_CARD_DIRECTIVES]
+  templateUrl: 'grid-list-demo.html',
+  styleUrls: ['grid-list-demo.css'],
+  providers: [MdIconRegistry]
 })
 export class GridListDemo {
   tiles: any[] = [
@@ -17,11 +17,21 @@ export class GridListDemo {
     {text: 'Four', cols: 2, rows: 1, color: '#DDBDF1'},
   ];
 
-  fixedCols: number = 4;
-  fixedRowHeight: number = 100;
-  ratioGutter: number = 1;
-  fitListHeight: string = '400px';
-  ratio: string = '4:1';
+  dogs: Object[] = [
+    { name: 'Porter', human: 'Kara' },
+    { name: 'Mal', human: 'Jeremy' },
+    { name: 'Koby', human: 'Igor' },
+    { name: 'Razzle', human: 'Ward' },
+    { name: 'Molly', human: 'Rob' },
+    { name: 'Husi', human: 'Matias' },
+  ];
+
+  basicRowHeight = 80;
+  fixedCols = 4;
+  fixedRowHeight = 100;
+  ratioGutter = 1;
+  fitListHeight = '400px';
+  ratio = '4:1';
 
   addTileCols() { this.tiles[2].cols++; }
 }

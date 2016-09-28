@@ -1,26 +1,34 @@
 import {
-    Component, ViewChildren, QueryList, ViewEncapsulation,
-    ViewContainerRef
+    Component,
+    ViewChildren,
+    QueryList,
+    ViewEncapsulation,
+    ViewChild,
+    ViewContainerRef,
 } from '@angular/core';
 import {
-  Overlay,
-  OverlayState} from '../../core/overlay/overlay';
-import {ComponentPortal, Portal} from '../../core/portal/portal';
-import {TemplatePortalDirective} from '../../core/portal/portal-directives';
+    Overlay,
+    OverlayState,
+    OverlayOrigin,
+    ComponentPortal,
+    Portal,
+    TemplatePortalDirective,
+} from '@angular/material';
 
 
 @Component({
+  moduleId: module.id,
   selector: 'overlay-demo',
-  templateUrl: 'demo-app/overlay/overlay-demo.html',
-  styleUrls: ['demo-app/overlay/overlay-demo.css'],
-  directives: [TemplatePortalDirective],
-  providers: [Overlay],
+  templateUrl: 'overlay-demo.html',
+  styleUrls: ['overlay-demo.css'],
   encapsulation: ViewEncapsulation.None,
 })
 export class OverlayDemo {
   nextPosition: number = 0;
+  isMenuOpen: boolean = false;
 
   @ViewChildren(TemplatePortalDirective) templatePortals: QueryList<Portal<any>>;
+  @ViewChild(OverlayOrigin) _overlayOrigin: OverlayOrigin;
 
   constructor(public overlay: Overlay, public viewContainerRef: ViewContainerRef) { }
 
@@ -34,9 +42,8 @@ export class OverlayDemo {
 
     this.nextPosition += 30;
 
-    this.overlay.create(config).then(ref => {
-      ref.attach(new ComponentPortal(PastaPanel, this.viewContainerRef));
-    });
+    let overlayRef = this.overlay.create(config);
+    overlayRef.attach(new ComponentPortal(RotiniPanel, this.viewContainerRef));
   }
 
   openFusilliPanel() {
@@ -49,17 +56,41 @@ export class OverlayDemo {
 
     this.nextPosition += 30;
 
-    this.overlay.create(config).then(ref => {
-      ref.attach(this.templatePortals.first);
-    });
+    let overlayRef = this.overlay.create(config);
+    overlayRef.attach(this.templatePortals.first);
+  }
+
+  openSpaghettiPanel() {
+    // TODO(jelbourn): separate overlay demo for connected positioning.
+    let strategy = this.overlay.position()
+        .connectedTo(
+            this._overlayOrigin.elementRef,
+            {originX: 'start', originY: 'bottom'},
+            {overlayX: 'start', overlayY: 'top'} );
+
+    let config = new OverlayState();
+    config.positionStrategy = strategy;
+
+    let overlayRef = this.overlay.create(config);
+    overlayRef.attach(new ComponentPortal(SpagettiPanel, this.viewContainerRef));
   }
 }
 
 /** Simple component to load into an overlay */
 @Component({
-  selector: 'pasta-panel',
+  moduleId: module.id,
+  selector: 'rotini-panel',
   template: '<p class="demo-rotini">Rotini {{value}}</p>'
 })
-class PastaPanel {
+export class RotiniPanel {
   value: number = 9000;
+}
+
+/** Simple component to load into an overlay */
+@Component({
+  selector: 'spagetti-panel',
+  template: '<div class="demo-spagetti">Spagetti {{value}}</div>'
+})
+export class SpagettiPanel {
+  value: string = 'Omega';
 }

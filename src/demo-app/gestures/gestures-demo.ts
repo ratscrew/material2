@@ -1,10 +1,10 @@
 import {Component} from '@angular/core';
 
 @Component({
+  moduleId: module.id,
   selector: 'gestures-demo',
-  templateUrl: 'demo-app/gestures/gestures-demo.html',
-  styleUrls: ['demo-app/gestures/gestures-demo.css'],
-  directives: []
+  templateUrl: 'gestures-demo.html',
+  styleUrls: ['gestures-demo.css'],
 })
 export class GesturesDemo {
   dragCount: number = 0;
@@ -12,4 +12,5 @@ export class GesturesDemo {
   pressCount: number = 0;
   longpressCount: number = 0;
   swipeCount: number = 0;
+  slideCount: number = 0;
 }
